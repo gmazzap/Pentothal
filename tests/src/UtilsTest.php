@@ -22,41 +22,65 @@ use Pentothal\Stubs;
 final class UtilsTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testVariadicCall()
+    /**
+     * @dataProvider variadicCallDataProvider
+     * @param array $args
+     */
+    public function testVariadicCall($args)
     {
         $function = function () {
             return func_get_args();
         };
 
-        assertSame([], P\variadicCall($function, []));
-        assertSame([true], P\variadicCall($function, [true]));
-        assertSame([false], P\variadicCall($function, [false]));
-        assertSame([false, true], P\variadicCall($function, [false, true]));
-        assertSame([false, 0, 1], P\variadicCall($function, [false, 0, 1]));
-        assertSame([false, 0, 1, []], P\variadicCall($function, [false, 0, 1, []]));
+        assertSame($args, P\variadicCall($function, $args));
     }
 
-    public function testVariadicCallNotEmpty()
+    public function variadicCallDataProvider()
+    {
+        return [
+            [[]],
+            [[true]],
+            [[false]],
+            [[false, true]],
+            [[false, 0, 1]],
+            [[false, 0, 1, []]],
+        ];
+    }
+
+    /**
+     * @dataProvider variadicCallBoolValDataProvider
+     * @param array $args
+     * @param bool  $expected
+     */
+    public function testVariadicCallBoolVal($args, $expected)
     {
         $function = function () {
-            $result = false;
             $args = func_get_args();
-            foreach ($args as $arg) {
-                $result = $arg;
+            if (empty($args)) {
+                return null;
             }
 
-            return $result;
+            return array_pop($args);
         };
 
-        assertFalse(P\variadicCallNotEmpty($function, []));
-        assertTrue(P\variadicCallNotEmpty($function, [true]));
-        assertFalse(P\variadicCallNotEmpty($function, ['']));
-        assertFalse(P\variadicCallNotEmpty($function, [false]));
-        assertTrue(P\variadicCallNotEmpty($function, [false, true]));
-        assertTrue(P\variadicCallNotEmpty($function, [false, 1]));
-        assertFalse(P\variadicCallNotEmpty($function, [false, 0]));
-        assertTrue(P\variadicCallNotEmpty($function, [false, 0, 1]));
-        assertFalse(P\variadicCallNotEmpty($function, [false, 0, 1, []]));
+        $value = P\variadicCallBoolVal($function, $args);
+
+        $expected ? assertTrue($value) : assertFalse($value);
+    }
+
+    public function variadicCallBoolValDataProvider()
+    {
+        return [
+            [[], false],
+            [[true], true],
+            [[false], false],
+            [[false, true], true],
+            [[false, '1'], true],
+            [[false, ''], false],
+            [[false, 0, 'true'], true],
+            [[false, 0, 1, []], false],
+            [[false, 0, 1, [], (object)['a' => 'b']], true],
+        ];
     }
 
     /**

@@ -24,7 +24,7 @@ function combineCallbacks(array $callbacks)
     return function ($value) use ($callbacks) {
         /** @var callable $cb */
         foreach ($callbacks as $cb) {
-            if ( ! variadicCallNotEmpty($cb, func_get_args())) {
+            if ( ! variadicCallBoolVal($cb, func_get_args())) {
                 return false;
             }
         }
@@ -68,7 +68,7 @@ function poolCallbacks(array $callbacks)
     return function ($value) use ($callbacks) {
         /** @var callable $cb */
         foreach ($callbacks as $cb) {
-            if (variadicCallNotEmpty($cb, func_get_args())) {
+            if (variadicCallBoolVal($cb, func_get_args())) {
                 return true;
             }
         }
