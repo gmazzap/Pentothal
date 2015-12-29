@@ -9,7 +9,8 @@
  */
 namespace Pentothal\Stubs;
 
-class CountThree implements \Countable {
+class CountThree implements \Countable
+{
 
     public function count()
     {
@@ -17,7 +18,8 @@ class CountThree implements \Countable {
     }
 }
 
-class Incrementable {
+class Incrementable
+{
 
     public $n = 0;
 
@@ -29,7 +31,8 @@ class Incrementable {
     }
 }
 
-class Aaa {
+class Aaa
+{
 
     public function __toString()
     {
