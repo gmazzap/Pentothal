@@ -28,3 +28,11 @@ class Incrementable {
         return $this;
     }
 }
+
+class Aaa {
+
+    public function __toString()
+    {
+        return 'aaa';
+    }
+}

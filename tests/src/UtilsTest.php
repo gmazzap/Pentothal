@@ -19,7 +19,7 @@ use Pentothal\Stubs;
  * @license http://opensource.org/licenses/MIT MIT
  * @package Pentothal
  */
-class UtilsTest extends PHPUnit_Framework_TestCase
+final class UtilsTest extends PHPUnit_Framework_TestCase
 {
 
     public function testVariadicCall()
