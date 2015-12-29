@@ -24,27 +24,45 @@ final class UtilsTest extends PHPUnit_Framework_TestCase
 
     public function testVariadicCall()
     {
-        $function = function($a = null, $b = null, $c = null, $d = null) {
+        $function = function () {
             return func_get_args();
         };
 
-        $zero = P\variadicCall($function, []);
-        $one = P\variadicCall($function, [1]);
-        $two = P\variadicCall($function, [1, 2]);
-        $three = P\variadicCall($function, [1, 2, 3]);
-        $four = P\variadicCall($function, [1, 2, 3, 4]);
+        assertSame([], P\variadicCall($function, []));
+        assertSame([true], P\variadicCall($function, [true]));
+        assertSame([false], P\variadicCall($function, [false]));
+        assertSame([false, true], P\variadicCall($function, [false, true]));
+        assertSame([false, 0, 1], P\variadicCall($function, [false, 0, 1]));
+        assertSame([false, 0, 1, []], P\variadicCall($function, [false, 0, 1, []]));
+    }
 
-        assertSame($zero, []);
-        assertSame($one, [1]);
-        assertSame($two, [1, 2]);
-        assertSame($three, [1, 2, 3]);
-        assertSame($four, [1, 2, 3, 4]);
+    public function testVariadicCallNotEmpty()
+    {
+        $function = function () {
+            $result = false;
+            $args = func_get_args();
+            foreach ($args as $arg) {
+                $result = $arg;
+            }
+
+            return $result;
+        };
+
+        assertFalse(P\variadicCallNotEmpty($function, []));
+        assertTrue(P\variadicCallNotEmpty($function, [true]));
+        assertFalse(P\variadicCallNotEmpty($function, ['']));
+        assertFalse(P\variadicCallNotEmpty($function, [false]));
+        assertTrue(P\variadicCallNotEmpty($function, [false, true]));
+        assertTrue(P\variadicCallNotEmpty($function, [false, 1]));
+        assertFalse(P\variadicCallNotEmpty($function, [false, 0]));
+        assertTrue(P\variadicCallNotEmpty($function, [false, 0, 1]));
+        assertFalse(P\variadicCallNotEmpty($function, [false, 0, 1, []]));
     }
 
     /**
      * @dataProvider polymorphicSizeDataProvider
      * @param mixed $element
-     * @param int $expected
+     * @param int   $expected
      */
     public function testPolymorphicSize($element, $expected)
     {

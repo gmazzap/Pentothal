@@ -34,6 +34,18 @@ function variadicCall(callable $callable, array $args = [])
 }
 
 /**
+ * @param callable $callable
+ * @param array    $args
+ * @return mixed
+ */
+function variadicCallNotEmpty(callable $callable, array $args = [])
+{
+    $result = variadicCall($callable, $args);
+
+    return ! empty($result);
+}
+
+/**
  * @param $value
  * @return int
  */
