@@ -133,8 +133,8 @@ final class UtilsTest extends PHPUnit_Framework_TestCase
     public function testApplyOnClone()
     {
         $stub = new Stubs\Incrementable();
-        $incremented1 = P\applyOnClone($stub, 'increment');
-        $incremented3 = P\applyOnClone($stub, 'increment', [3]);
+        $incremented1 = P\callOnClone($stub, 'increment');
+        $incremented3 = P\callOnClone($stub, 'increment', [3]);
 
         assertSame(0, $stub->n);
         assertSame(1, $incremented1->n);

@@ -86,7 +86,7 @@ function polymorphicKeyValue($item, $key)
  * @param array  $args
  * @return mixed
  */
-function applyOnClone($object, $method, array $args = [])
+function callOnClone($object, $method, array $args = [])
 {
     $clone = clone $object;
     $callback = [$clone, $method];
