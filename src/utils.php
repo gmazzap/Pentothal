@@ -45,7 +45,7 @@ function variadicCallBoolVal(callable $callable, array $args = [])
 
 /**
  * @param $value
- * @return int
+ * @return int|null
  */
 function polymorphicSize($value)
 {
@@ -65,7 +65,7 @@ function polymorphicSize($value)
             return $value instanceof \Countable ? count($value) : 1;
     }
 
-    return -1;
+    return null;
 }
 
 /**
