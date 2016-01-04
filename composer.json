@@ -1,10 +1,12 @@
 {
     "name":              "gmazzap/pentothal",
-    "description":       "Function libraries for higher-order predicates.",
+    "description":       "Higher-order functional predicates.",
     "keywords":          [
         "function",
+        "functional programming",
         "predicates",
-        "validation"
+        "validation",
+        "filtering"
     ],
     "homepage":          "https://github.com/Giuseppe-Mazzapica/Pentothal",
     "type":              "library",
