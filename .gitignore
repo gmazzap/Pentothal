@@ -3,7 +3,7 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 .DS_Store
-.coverage
+.coverage/
 .tox
 .idea/
 vendor/
