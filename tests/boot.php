@@ -18,5 +18,3 @@ require_once $vendor.'autoload.php';
 require_once $vendor.'phpunit/phpunit/src/Framework/Assert/Functions.php';
 
 unset($vendor);
-
-require_once __DIR__.'/stubs.php';

@@ -12,7 +12,7 @@ namespace Pentothal\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
-use Pentothal\Stubs;
+use Pentothal\Tests\Stubs;
 
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>

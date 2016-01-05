@@ -12,7 +12,7 @@ namespace Pentothal\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
-use Pentothal\Stubs\CountThree;
+use Pentothal\Tests\Stubs;
 
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>
@@ -123,7 +123,7 @@ final class ContainTest extends PHPUnit_Framework_TestCase
             [['a' => 'a', 'b' => 'b', 'c' => 'c'], '', false],
             [['a' => 'a', 'b' => 'b', 'c' => 'c'], 'x', false],
             [(object)['a', 'b', 'c'], 'a', false],
-            [new CountThree(), 3, false],
+            [new Stubs\CountThree(), 3, false],
         ];
     }
 
@@ -176,7 +176,7 @@ final class ContainTest extends PHPUnit_Framework_TestCase
             [['a' => 'a', 'b' => 'b', 'c' => 'c'], '', false],
             [['a' => 'a', 'b' => 'b', 'c' => 'c'], 'x', false],
             [(object)['a', 'b', 'c'], 'a', false],
-            [new CountThree(), 3, false],
+            [new Stubs\CountThree(), 3, false],
         ];
     }
 

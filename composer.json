@@ -35,7 +35,10 @@
     "autoload-dev":      {
         "psr-4": {
             "Pentothal\\Tests\\": "tests/src/"
-        }
+        },
+        "files": [
+            "tests/stubs.php"
+        ]
     },
     "config":            {
         "optimize-autoloader": true

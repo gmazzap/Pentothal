@@ -12,6 +12,7 @@ namespace Pentothal\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
+use Pentothal\Tests\Stubs;
 
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>
@@ -296,7 +297,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
             [1.1],
             [true],
             [''],
-            [new P\Stubs\CountThree()],
+            [new Stubs\CountThree()],
             [[]],
             [null],
             [[1, '']],

@@ -21,7 +21,7 @@
     </logging>
     <testsuites>
         <testsuite name="U">
-            <directory>./tests/src/Unit</directory>
+            <directory>./tests/src/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
