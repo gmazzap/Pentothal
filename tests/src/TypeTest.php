@@ -70,8 +70,10 @@ final class TypeTest extends PHPUnit_Framework_TestCase
             ['array', ['a', 'b'], true],
             ['array', new \ArrayObject(), false],
             ['object', new \ArrayObject(), true],
+            [new \ArrayObject(), new \ArrayObject(), true],
             ['ArrayObject', new \ArrayObject(), true],
             ['Pentothal\ArrayObject', new \ArrayObject(), false],
+            [true, true, false],
         ];
     }
 

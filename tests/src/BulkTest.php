@@ -42,6 +42,8 @@ final class BulkTest extends PHPUnit_Framework_TestCase
             [[1, 2.0, 3], 'is_int', false],
             [[true, false, false], 'is_bool', true],
             [[true, false, 0], 'is_bool', false],
+            ['', 'is_string', false],
+            [new \stdClass(), 'is_object', false],
         ];
     }
 
@@ -66,6 +68,8 @@ final class BulkTest extends PHPUnit_Framework_TestCase
             [[1.1, 2.0, 3.0], 'is_int', false],
             [['a', 'b', 'c'], 'is_array', false],
             [['a', [], 'c'], 'is_array', true],
+            ['', 'is_string', false],
+            [new \stdClass(), 'is_object', false],
         ];
     }
 }

@@ -109,6 +109,7 @@ final class SizeTest extends PHPUnit_Framework_TestCase
             [new \stdClass(), 1, true],
             [new \stdClass(), 0, false],
             [new \stdClass(), 5, true],
+            [5, 'five', false],
         ];
     }
 
@@ -155,6 +156,7 @@ final class SizeTest extends PHPUnit_Framework_TestCase
             [new \stdClass(), 1, false],
             [new \stdClass(), 0, false],
             [new \stdClass(), 5, true],
+            [5, 'five', false],
         ];
     }
 
@@ -201,6 +203,7 @@ final class SizeTest extends PHPUnit_Framework_TestCase
             [new \stdClass(), 1, true],
             [new \stdClass(), 0, true],
             [new \stdClass(), 2, false],
+            [5, 'five', false],
         ];
     }
 
@@ -247,6 +250,7 @@ final class SizeTest extends PHPUnit_Framework_TestCase
             [new \stdClass(), 1, false],
             [new \stdClass(), 0, true],
             [new \stdClass(), 2, false],
+            [5, 'five', false],
         ];
     }
 

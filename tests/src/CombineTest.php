@@ -59,6 +59,17 @@ final class CombineTest extends PHPUnit_Framework_TestCase
      * @param $str
      * @param $expected
      */
+    public function testCombineCallbacksEmpty($str, $expected)
+    {
+        $test = P\combineCallbacks([]);
+        assertFalse($test($str));
+    }
+
+    /**
+     * @dataProvider combineDataProvider
+     * @param $str
+     * @param $expected
+     */
     public function testCombine($str, $expected)
     {
         $isThreeChars = function ($value) {
@@ -157,6 +168,17 @@ final class CombineTest extends PHPUnit_Framework_TestCase
         ]);
 
         $expected ? assertTrue($test($str)) : assertFalse($test($str));
+    }
+
+    /**
+     * @dataProvider poolDataProvider
+     * @param $str
+     * @param $expected
+     */
+    public function testPoolCallbacksEmpty($str, $expected)
+    {
+        $test = P\poolCallbacks([]);
+        assertFalse($test($str));
     }
 
     /**

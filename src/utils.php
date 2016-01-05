@@ -45,27 +45,34 @@ function variadicCallBoolVal(callable $callable, array $args = [])
 
 /**
  * @param $value
- * @return int|null
+ * @return int|void Void is returned for unknown types: should never happen
  */
 function polymorphicSize($value)
 {
-    switch (gettype($value)) {
+    $size = null;
+    $type = gettype($value);
+    switch ($type) {
         case 'boolean' :
         case 'double' :
         case 'integer' :
         case 'resource' :
-            return (int)$value;
+            $size = (int)$value;
+            break;
         case 'array' :
-            return count($value);
+            $size = count($value);
+            break;
         case 'string' :
-            return function_exists('mb_strlen') ? mb_strlen($value) : strlen($value);
+            $size = function_exists('mb_strlen') ? mb_strlen($value) : strlen($value);
+            break;
         case 'NULL' :
-            return 0;
+            $size = 0;
+            break;
         case 'object' :
-            return $value instanceof \Countable ? count($value) : 1;
+            $size = $value instanceof \Countable ? count($value) : 1;
+            break;
     }
 
-    return null;
+    return $size;
 }
 
 /**
