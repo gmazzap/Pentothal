@@ -103,7 +103,7 @@ Here a list of all the functions currently provided by library (namespace omitte
 
 ### Var filtering check
 
- - `filterVar(int $filter, $options)` Returns a predicate that applies `filter_var()` to subject using given filter and options.
+ - `filterVar(int $filter, $options = null)` Returns a predicate that applies `filter_var()` to subject using given filter and options.
  - `isEmail()`
  - `isNotEmail()`
  - `isUrl()`
@@ -200,7 +200,7 @@ Here a list of all the functions currently provided by library (namespace omitte
 - `combineMap(array $predicates)` Takes a map of predicates and return a predicates that applies to a map value, returns true when all the predicates return true
 - `poolMap(array $predicates)` Like combineMap, but the returned predicates return `true` when any the predicates returns `true`
  
-## Quite Complex Example
+## Quite complex example
 
 ```php
 // some example data
