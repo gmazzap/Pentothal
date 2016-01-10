@@ -36,7 +36,7 @@ function hasKey($key)
  * @param string $key
  * @return \Closure
  */
-function notHasKey($key)
+function hasNotKey($key)
 {
     return negate(hasKey($key));
 }
@@ -57,14 +57,14 @@ function hasKeys()
 /**
  * @return \Closure
  */
-function notHasKeys()
+function hasNotKeys()
 {
     $keys = array_filter(func_get_args(), 'is_string');
     if (empty($keys)) {
         return never();
     }
 
-    return combineFactory($keys, '\\Pentothal\\notHasKey');
+    return combineFactory($keys, '\\Pentothal\\hasNotKey');
 }
 
 
@@ -84,14 +84,14 @@ function hasAnyOfKeys()
 /**
  * @return \Closure
  */
-function notHasAnyOfKeys()
+function hasNotAnyOfKeys()
 {
     $keys = array_filter(func_get_args(), 'is_string');
     if (empty($keys)) {
         return never();
     }
 
-    return poolFactory($keys, '\\Pentothal\\notHasKey');
+    return poolFactory($keys, '\\Pentothal\\hasNotKey');
 }
 
 /**
@@ -99,7 +99,7 @@ function notHasAnyOfKeys()
  * @param mixed  $value
  * @return \Closure
  */
-function keyValue($key, $value)
+function keyIs($key, $value)
 {
     if ( ! is_string($key)) {
         return never();
@@ -119,9 +119,9 @@ function keyValue($key, $value)
  * @param mixed  $value
  * @return \Closure
  */
-function notKeyValue($key, $value)
+function keyIsNot($key, $value)
 {
-    return negate(keyValue($key, $value));
+    return negate(keyIs($key, $value));
 }
 
 /**
@@ -129,7 +129,7 @@ function notKeyValue($key, $value)
  * @param array  $values
  * @return \Closure
  */
-function keyAnyOf($key, array $values)
+function keyIsAnyOf($key, array $values)
 {
     if (empty($values)) {
         return never();
@@ -149,9 +149,9 @@ function keyAnyOf($key, array $values)
  * @param array  $values
  * @return \Closure
  */
-function keyNotAnyOf($key, array $values)
+function keyIsNotAnyOf($key, array $values)
 {
-    return negate(keyAnyOf($key, $values));
+    return negate(keyIsAnyOf($key, $values));
 }
 
 /**
@@ -159,7 +159,7 @@ function keyNotAnyOf($key, array $values)
  * @param string $type
  * @return \Closure
  */
-function keyType($key, $type)
+function keyIsType($key, $type)
 {
     if ( ! is_string($key)) {
         return never();
@@ -181,9 +181,9 @@ function keyType($key, $type)
  * @param string $type
  * @return \Closure
  */
-function notKeyType($key, $type)
+function keyIsNotType($key, $type)
 {
-    return negate(keyType($key, $type));
+    return negate(keyIsType($key, $type));
 }
 
 /**
@@ -249,7 +249,7 @@ function hasValue($value)
  * @param mixed $value
  * @return \Closure
  */
-function notHasValue($value)
+function hasNotValue($value)
 {
     return negate(hasValue($value));
 }
@@ -270,14 +270,14 @@ function hasValues()
 /**
  * @return \Closure
  */
-function notHasValues()
+function hasNotValues()
 {
     $values = func_get_args();
     if (empty($values)) {
         return never();
     }
 
-    return combineFactory($values, '\\Pentothal\\notHasValue');
+    return combineFactory($values, '\\Pentothal\\hasNotValue');
 }
 
 /**
@@ -296,12 +296,12 @@ function hasAnyOfValues()
 /**
  * @return \Closure
  */
-function notHasAnyOfValues()
+function hasNotAnyOfValues()
 {
     $values = func_get_args();
     if (empty($values)) {
         return never();
     }
 
-    return poolFactory($values, '\\Pentothal\\notHasValue');
+    return poolFactory($values, '\\Pentothal\\hasNotValue');
 }

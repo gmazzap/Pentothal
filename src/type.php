@@ -45,7 +45,7 @@ function isType($type)
  * @param string $type
  * @return \Closure
  */
-function notIsType($type)
+function isNotType($type)
 {
     return negate(isType($type));
 }
@@ -91,7 +91,7 @@ function isInt()
 /**
  * @return \Closure
  */
-function notIsInt()
+function isNotInt()
 {
     return negate(isInt());
 }
@@ -107,7 +107,7 @@ function isFloat()
 /**
  * @return \Closure
  */
-function notIsFloat()
+function isNotFloat()
 {
     return negate(isFloat());
 }
@@ -123,7 +123,7 @@ function isNumber()
 /**
  * @return \Closure
  */
-function notIsNumber()
+function isNotNumber()
 {
     return negate(isNumber());
 }
@@ -139,7 +139,7 @@ function isBool()
 /**
  * @return \Closure
  */
-function notIsBool()
+function isNotBool()
 {
     return negate(isBool());
 }
@@ -155,7 +155,7 @@ function isNull()
 /**
  * @return \Closure
  */
-function notIsNull()
+function isNotNull()
 {
     return negate(isNull());
 }
@@ -171,7 +171,7 @@ function isString()
 /**
  * @return \Closure
  */
-function notIsString()
+function isNotString()
 {
     return negate(isString());
 }
@@ -187,7 +187,7 @@ function isObject()
 /**
  * @return \Closure
  */
-function notIsObject()
+function isNotObject()
 {
     return negate(isObject());
 }
@@ -203,7 +203,7 @@ function isArray()
 /**
  * @return \Closure
  */
-function notIsArray()
+function isNotArray()
 {
     return negate(isArray());
 }
@@ -221,7 +221,7 @@ function isEmail()
 /**
  * @return \Closure
  */
-function notIsEmail()
+function isNotEmail()
 {
     return negate(isEmail());
 }
@@ -244,7 +244,7 @@ function isUrl()
 /**
  * @return \Closure
  */
-function notIsUrl()
+function isNotUrl()
 {
     return negate(isUrl());
 }
@@ -262,7 +262,7 @@ function isIp()
 /**
  * @return \Closure
  */
-function notIsIp()
+function isNotIp()
 {
     return negate(isIp());
 }
@@ -280,7 +280,7 @@ function isMac()
 /**
  * @return \Closure
  */
-function notIsMac()
+function isNotMac()
 {
     return negate(isMac());
 }

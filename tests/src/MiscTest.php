@@ -32,8 +32,8 @@ final class MiscTest extends PHPUnit_Framework_TestCase
         $number3 = 3;
 
         $filter = P\combine(
-            P\pool(P\notIsObject(), P\isType('Countable')), // filter out: $plainObj
-            P\pool(P\notIsString(), P\size(3)), // filter out: $string1
+            P\pool(P\isNotObject(), P\isType('Countable')), // filter out: $plainObj
+            P\pool(P\isNotString(), P\size(3)), // filter out: $string1
             P\pool(P\isString(), P\size(1)) // filter out: $countableTwo, $number3
         );
 

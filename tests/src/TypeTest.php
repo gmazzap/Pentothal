@@ -44,7 +44,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
     public function testNotIsType($type, $value, $notExpected)
     {
         /** @var \Closure $notIsType */
-        $notIsType = P\notIsType($type);
+        $notIsType = P\isNotType($type);
         $notExpected ? assertFalse($notIsType($value)) : assertTrue($notIsType($value));
     }
 
@@ -143,7 +143,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsInt($value)
     {
-        $notIsInt = P\notIsInt($value);
+        $notIsInt = P\isNotInt($value);
         \is_int($value) ? assertFalse($notIsInt($value)) : assertTrue($notIsInt($value));
     }
 
@@ -163,7 +163,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsFloat($value)
     {
-        $notIsFloat = P\notIsFloat($value);
+        $notIsFloat = P\isNotFloat($value);
         \is_float($value) ? assertFalse($notIsFloat($value)) : assertTrue($notIsFloat($value));
     }
 
@@ -183,7 +183,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsBool($value)
     {
-        $notIsBool = P\notIsBool($value);
+        $notIsBool = P\isNotBool($value);
         \is_bool($value) ? assertFalse($notIsBool($value)) : assertTrue($notIsBool($value));
     }
 
@@ -203,7 +203,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsNumber($value)
     {
-        $notIsNumber = P\notIsNumber($value);
+        $notIsNumber = P\isNotNumber($value);
         \is_numeric($value) ? assertFalse($notIsNumber($value)) : assertTrue($notIsNumber($value));
     }
 
@@ -224,7 +224,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsNull($value)
     {
-        $notIsNull = P\notIsNull($value);
+        $notIsNull = P\isNotNull($value);
         \is_null($value) ? assertFalse($notIsNull($value)) : assertTrue($notIsNull($value));
     }
 
@@ -245,7 +245,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsString($value)
     {
-        $notIsString = P\notIsString($value);
+        $notIsString = P\isNotString($value);
         \is_string($value) ? assertFalse($notIsString($value)) : assertTrue($notIsString($value));
     }
 
@@ -266,7 +266,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsObject($value)
     {
-        $notIsObject = P\notIsObject($value);
+        $notIsObject = P\isNotObject($value);
         \is_object($value) ? assertFalse($notIsObject($value)) : assertTrue($notIsObject($value));
     }
 
@@ -287,7 +287,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsArray($value)
     {
-        $notIsArray = P\notIsArray($value);
+        $notIsArray = P\isNotArray($value);
         \is_array($value) ? assertFalse($notIsArray($value)) : assertTrue($notIsArray($value));
     }
 
@@ -324,7 +324,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsEmail($value, $type)
     {
-        $notIsEmail = P\notIsEmail();
+        $notIsEmail = P\isNotEmail();
         $type === 'email' ? assertFalse($notIsEmail($value)) : assertTrue($notIsEmail($value));
     }
 
@@ -346,7 +346,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsUrl($value, $type)
     {
-        $notIsUrl = P\notIsUrl();
+        $notIsUrl = P\isNotUrl();
         $type === 'url' ? assertFalse($notIsUrl($value)) : assertTrue($notIsUrl($value));
     }
 
@@ -368,7 +368,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsIp($value, $type)
     {
-        $notIsIp = P\notIsIp();
+        $notIsIp = P\isNotIp();
         $type === 'ip' ? assertFalse($notIsIp($value)) : assertTrue($notIsIp($value));
     }
 
@@ -390,7 +390,7 @@ final class TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testNotIsMac($value, $type)
     {
-        $notIsMac = P\notIsMac();
+        $notIsMac = P\isNotMac();
         $type === 'mac' ? assertFalse($notIsMac($value)) : assertTrue($notIsMac($value));
     }
 

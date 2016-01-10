@@ -29,7 +29,7 @@ function hasMethod($method)
  * @param string $method
  * @return \Closure
  */
-function notHasMethod($method)
+function hasNotMethod($method)
 {
     return negate(hasMethod($method));
 }
