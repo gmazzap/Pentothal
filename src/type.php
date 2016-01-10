@@ -20,7 +20,7 @@ function isType($type)
         $type = get_class($type);
     }
 
-    if ( ! is_string($type)) {
+    if (! is_string($type)) {
         return never();
     }
 
@@ -48,36 +48,6 @@ function isType($type)
 function isNotType($type)
 {
     return negate(isType($type));
-}
-
-/**
- * @param string $regex
- * @return \Closure
- */
-function match($regex)
-{
-    if ( ! is_string($regex) || $regex === '') {
-        return never();
-    }
-
-    $first = substr($regex, 0, 1);
-    $last = substr($regex, -1, 1);
-    if (($first !== $last) || strlen($regex) === 1) {
-        $regex = "/{$regex}/";
-    }
-
-    return function ($value) use ($regex) {
-        return is_string($value) && @preg_match($regex, $value) === 1;
-    };
-}
-
-/**
- * @param string $regex
- * @return \Closure
- */
-function notMatch($regex)
-{
-    return negate(match($regex));
 }
 
 /**
@@ -206,81 +176,4 @@ function isArray()
 function isNotArray()
 {
     return negate(isArray());
-}
-
-/**
- * @return \Closure
- */
-function isEmail()
-{
-    return function ($value) {
-        return (bool)filter_var($value, FILTER_VALIDATE_EMAIL);
-    };
-}
-
-/**
- * @return \Closure
- */
-function isNotEmail()
-{
-    return negate(isEmail());
-}
-
-/**
- * @return \Closure
- */
-function isUrl()
-{
-    return function ($value) {
-        // FILTER_VALIDATE_URL does not recognize protocol-relative urls
-        if (is_string($value) && strpos($value, '//') === 0) {
-            $value = 'http:'.$value;
-        }
-
-        return (bool)filter_var($value, FILTER_VALIDATE_URL);
-    };
-}
-
-/**
- * @return \Closure
- */
-function isNotUrl()
-{
-    return negate(isUrl());
-}
-
-/**
- * @return \Closure
- */
-function isIp()
-{
-    return function ($value) {
-        return (bool)filter_var($value, FILTER_VALIDATE_IP);
-    };
-}
-
-/**
- * @return \Closure
- */
-function isNotIp()
-{
-    return negate(isIp());
-}
-
-/**
- * @return \Closure
- */
-function isMac()
-{
-    return function ($value) {
-        return (bool)filter_var($value, FILTER_VALIDATE_MAC);
-    };
-}
-
-/**
- * @return \Closure
- */
-function isNotMac()
-{
-    return negate(isMac());
 }

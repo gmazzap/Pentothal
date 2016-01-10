@@ -22,12 +22,12 @@ function combineMap(array $callbacks)
     }
 
     return function ($item) use ($callbacks) {
-        if ( ! is_array($item) && ! is_object($item)) {
+        if (! is_array($item) && ! is_object($item)) {
             return false;
         }
 
         foreach ($callbacks as $key => $callback) {
-            if ( ! variadicCallBoolVal(keyApply($key, $callback), func_get_args())) {
+            if (! variadicCallBoolVal(keyApply($key, $callback), func_get_args())) {
                 return false;
             }
         }
@@ -48,7 +48,7 @@ function poolMap(array $callbacks)
     }
 
     return function ($item) use ($callbacks) {
-        if ( ! is_array($item) && ! is_object($item)) {
+        if (! is_array($item) && ! is_object($item)) {
             return false;
         }
 

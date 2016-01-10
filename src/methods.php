@@ -16,7 +16,7 @@ namespace Pentothal;
  */
 function hasMethod($method)
 {
-    if ( ! is_string($method)) {
+    if (! is_string($method)) {
         return never();
     }
 

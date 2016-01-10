@@ -16,12 +16,12 @@ namespace Pentothal;
  */
 function size($size)
 {
-    if ( ! is_numeric($size)) {
+    if (! is_numeric($size)) {
         return never();
     }
 
     return function ($value) use ($size) {
-        return polymorphicSize($value) === (int)$size;
+        return polymorphicSize($value) === (int) $size;
     };
 }
 
@@ -31,14 +31,14 @@ function size($size)
  */
 function sizeMax($max)
 {
-    if ( ! is_numeric($max)) {
+    if (! is_numeric($max)) {
         return never();
     }
 
     return function ($value) use ($max) {
         $size = polymorphicSize($value);
 
-        return is_int($size) && $size <= (int)$max;
+        return is_int($size) && $size <= (int) $max;
     };
 }
 
@@ -48,14 +48,14 @@ function sizeMax($max)
  */
 function sizeMaxStrict($max)
 {
-    if ( ! is_numeric($max)) {
+    if (! is_numeric($max)) {
         return never();
     }
 
     return function ($value) use ($max) {
         $size = polymorphicSize($value);
 
-        return is_int($size) >= 0 && $size < (int)$max;
+        return is_int($size) >= 0 && $size < (int) $max;
     };
 }
 
@@ -65,14 +65,14 @@ function sizeMaxStrict($max)
  */
 function sizeMin($min)
 {
-    if ( ! is_numeric($min)) {
+    if (! is_numeric($min)) {
         return never();
     }
 
     return function ($value) use ($min) {
         $size = polymorphicSize($value);
 
-        return is_int($size) >= 0 && $size >= (int)$min;
+        return is_int($size) >= 0 && $size >= (int) $min;
     };
 }
 
@@ -82,14 +82,14 @@ function sizeMin($min)
  */
 function sizeMinStrict($min)
 {
-    if ( ! is_numeric($min)) {
+    if (! is_numeric($min)) {
         return never();
     }
 
     return function ($value) use ($min) {
         $size = polymorphicSize($value);
 
-        return is_int($size) && $size > (int)$min;
+        return is_int($size) && $size > (int) $min;
     };
 }
 

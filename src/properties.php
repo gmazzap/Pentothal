@@ -16,16 +16,16 @@ namespace Pentothal;
  */
 function hasKey($key)
 {
-    if ( ! is_string($key) || is_int($key)) {
+    if (! is_string($key) || is_int($key)) {
         return never();
     }
 
     return function ($value) use ($key) {
-        if ( ! is_array($value) && ! is_object($value)) {
+        if (! is_array($value) && ! is_object($value)) {
             return false;
         }
         if (is_object($value) && ! $value instanceof \ArrayAccess) {
-            return (bool)property_exists($value, $key);
+            return (bool) property_exists($value, $key);
         }
 
         return array_key_exists($key, $value);
@@ -67,7 +67,6 @@ function hasNotKeys()
     return combineFactory($keys, '\\Pentothal\\hasNotKey');
 }
 
-
 /**
  * @return \Closure
  */
@@ -101,7 +100,7 @@ function hasNotAnyOfKeys()
  */
 function keyIs($key, $value)
 {
-    if ( ! is_string($key)) {
+    if (! is_string($key)) {
         return never();
     }
 
@@ -161,7 +160,7 @@ function keyIsNotAnyOf($key, array $values)
  */
 function keyIsType($key, $type)
 {
-    if ( ! is_string($key)) {
+    if (! is_string($key)) {
         return never();
     }
 
@@ -193,7 +192,7 @@ function keyIsNotType($key, $type)
  */
 function keyApply($key, callable $callback)
 {
-    if ( ! is_string($key)) {
+    if (! is_string($key)) {
         return never();
     }
 
@@ -225,7 +224,7 @@ function notKeyApply($key, callable $callback)
 function hasValue($value)
 {
     return function ($item) use ($value) {
-        if ( ! is_array($item) && ! is_object($item)) {
+        if (! is_array($item) && ! is_object($item)) {
             return false;
         }
         /** @var object|array $item */
@@ -239,7 +238,6 @@ function hasValue($value)
                 return true;
             }
         }
-
 
         return false;
     };

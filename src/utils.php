@@ -56,7 +56,7 @@ function polymorphicSize($value)
         case 'double' :
         case 'integer' :
         case 'resource' :
-            $size = (int)$value;
+            $size = (int) $value;
             break;
         case 'array' :
             $size = count($value);

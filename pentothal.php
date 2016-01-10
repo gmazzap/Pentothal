@@ -9,10 +9,12 @@
  */
 
 require_once 'src/utils.php';
-require_once 'src/combine.php';
+require_once 'src/composition.php';
 require_once 'src/bulk.php';
 require_once 'src/general.php';
+require_once 'src/comparison.php';
 require_once 'src/type.php';
+require_once 'src/filter.php';
 require_once 'src/size.php';
 require_once 'src/contain.php';
 require_once 'src/properties.php';

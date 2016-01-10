@@ -18,7 +18,7 @@ function contain($item)
 {
     return function ($value) use ($item) {
         if (
-            ( ! is_string($value) && ! is_array($value))
+            (! is_string($value) && ! is_array($value))
             || (is_string($value) && ! is_string($item))
             || empty($value)
         ) {
@@ -53,7 +53,7 @@ function startWith($start)
 {
     return function ($value) use ($start) {
         if (
-            ( ! is_string($value) && ! is_array($value))
+            (! is_string($value) && ! is_array($value))
             || (is_string($value) && ! is_string($start))
             || empty($value)
         ) {
@@ -88,7 +88,7 @@ function endWith($end)
 {
     return function ($value) use ($end) {
         if (
-            ( ! is_string($value) && ! is_array($value))
+            (! is_string($value) && ! is_array($value))
             || (is_string($value) && ! is_string($end))
             || empty($value)
         ) {

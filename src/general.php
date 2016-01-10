@@ -41,47 +41,6 @@ function negate(callable $callable)
     };
 }
 
-
-/**
- * @param mixed $compare
- * @return \Closure
- */
-function isSame($compare)
-{
-    return function ($value) use ($compare) {
-        return $value === $compare;
-    };
-}
-
-/**
- * @param mixed $compare
- * @return \Closure
- */
-function isNotSame($compare)
-{
-    return negate(isSame($compare));
-}
-
-/**
- * @param $compare
- * @return \Closure
- */
-function isEqual($compare)
-{
-    return function ($value) use ($compare) {
-        return $value == $compare;
-    };
-}
-
-/**
- * @param $compare
- * @return \Closure
- */
-function isNotEqual($compare)
-{
-    return negate(isEqual($compare));
-}
-
 /**
  * @return \Closure
  */

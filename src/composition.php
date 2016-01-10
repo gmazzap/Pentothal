@@ -24,7 +24,7 @@ function combineCallbacks(array $callbacks)
     return function ($value) use ($callbacks) {
         /** @var callable $cb */
         foreach ($callbacks as $cb) {
-            if ( ! variadicCallBoolVal($cb, func_get_args())) {
+            if (! variadicCallBoolVal($cb, func_get_args())) {
                 return false;
             }
         }
@@ -40,7 +40,6 @@ function combine()
 {
     return combineCallbacks(func_get_args());
 }
-
 
 /**
  * @param array    $args

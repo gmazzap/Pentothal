@@ -17,13 +17,13 @@ namespace Pentothal;
 function bulk(callable $callable)
 {
     return function ($value) use ($callable) {
-        if ( ! is_array($value) && ! $value instanceof \Traversable) {
+        if (! is_array($value) && ! $value instanceof \Traversable) {
             return false;
         }
         $args = func_get_args();
         foreach ($value as $item) {
             $args[0] = $item;
-            if ( ! variadicCallBoolVal($callable, $args)) {
+            if (! variadicCallBoolVal($callable, $args)) {
                 return false;
             }
         }
@@ -39,7 +39,7 @@ function bulk(callable $callable)
 function bulkPool(callable $callable)
 {
     return function ($value) use ($callable) {
-        if ( ! is_array($value) && ! $value instanceof \Traversable) {
+        if (! is_array($value) && ! $value instanceof \Traversable) {
             return false;
         }
         $args = func_get_args();
