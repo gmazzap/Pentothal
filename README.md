@@ -5,15 +5,15 @@ Higher order predicates library.
 
 ## What?
 
-An higher order function is a function that returns a function, or that takes a function as argument.
+An "higher order function" is a function that either returns a function or takes a function as argument.
 
-A functional predicate is a function that receives one or more arguments and return true or false.
+A "functional predicate" is a function that receives one or more arguments (subject) and returns `true` or `false`.
 
-This library is a collections of functions that returns functional predicates.
+**This library is a collections of functions that return functional predicates**.
 
 ## Why?
 
-In PHP there are some function like `array_map`, `array_filter` and so on that takes a functional predicate
+In PHP there are some functions like `array_map`, `array_filter`, and so on, that take a functional predicate
 as argument.
 
 For example:
@@ -31,8 +31,9 @@ $data = [
 $strings = array_filter($data, 'is_string'); // ['foo', 'bar', '']
 ```
 
-This can be done thanks to the fact that a `is_string` is a named function. But if we need to also strip
-empty strings, we need to:
+This can be done thanks to the fact that a `is_string` is a named function.
+
+But if we need something more complex, e.g. we also want to strip empty strings, we need to:
 
 ```php
 $strings = array_filter($data, function($item) {
@@ -40,12 +41,15 @@ $strings = array_filter($data, function($item) {
 });
 ```
 
-One of the functions of this library is `isType()` that accepts a type and returns a predicate.
+One of the functions of this library is `isType()` that accepts a string representing a type 
+and returns a predicate that can be used to check subjects against that typoe.
+
+Another of the functions of this library is `isNotEmpty()` that returns a predicate that verifies non-empty values.
 
 Another function is `combine()` that takes an arbitrary number of predicates and returns a predicate
-that return true when all the combined predicates return true.
+that returns `true` when all the combined predicates return true.
 
-Using these 2 functions the code above can be written like this:
+Using these 3 functions the code above can be written like this:
 
 ```php
 use Pentothal as P;
@@ -53,7 +57,7 @@ use Pentothal as P;
 $strings = array_filter($data, P\combine(P\isType('string'), P\isNotEmpty()));
 ```
 
-All the functions in the library are in the Pentothal namespace.
+All the functions in this library are in `Pentothal` namespace.
 
 
 ## List of functions
@@ -73,13 +77,13 @@ Here a list of all the functions currently provided by library (namespace omitte
  - `isNotSame($value)`
  - `isEqual($value)`
  - `isNotEqual($value)`
- - `match($regex)` 
- - `notMatch()`
+ - `match(string $regex)` 
+ - `notMatch(string $regex)`
  
 ### Type check
 
- - `isType($type)` Works with scalar types, classes and interfaces
- - `isNotType($type)`
+ - `isType(string $type)` Works with scalar types, classes and interfaces
+ - `isNotType(string $type)`
  - `isInt()`
  - `isNotInt()`
  - `isFloat()`
@@ -96,6 +100,10 @@ Here a list of all the functions currently provided by library (namespace omitte
  - `isNotObject()`
  - `isArray()`
  - `isNotArray()`
+
+### Var filtering check
+
+ - `filterVar(int $filter, $options)` Returns a predicate that applies `filter_var()` to subject using given filter and options.
  - `isEmail()`
  - `isNotEmail()`
  - `isUrl()`
@@ -107,19 +115,19 @@ Here a list of all the functions currently provided by library (namespace omitte
  
 ### Size check
 
- - `size($size)` Verify elements count of arrays and countable objects and string length
- - `sizeMax($size)`
- - `sizeMaxStrict($size)`
- - `sizeMin($size)`
- - `sizeMinStrict($size)`
- - `between($min, $max)`
- - `notBetween($min, $max)`
- - `betweenInner($min, $max)`
- - `notBetweenInner($min, $max)`
- - `betweenLeft($min, $max)`
- - `notBetweenLeft($min, $max)`
- - `betweenRight($min, $max)`
- - `notBetweenRight($min, $max)`
+ - `size(int $size)` Verify elements count of arrays and countable objects and string length
+ - `sizeMax(int $size)`
+ - `sizeMaxStrict(int $size)`
+ - `sizeMin(int $size)`
+ - `sizeMinStrict(int $size)`
+ - `between(int $min, int $max)`
+ - `notBetween(int $min, int $max)`
+ - `betweenInner(int $min, int $max)`
+ - `notBetweenInner(int $min, int $max)`
+ - `betweenLeft(int $min, int $max)`
+ - `notBetweenLeft(int $min, int $max)`
+ - `betweenRight(int $min, int $max)`
+ - `notBetweenRight(int $min, int $max)`
  
 ### Elements check (for arrays and strings)
 
@@ -148,34 +156,33 @@ Here a list of all the functions currently provided by library (namespace omitte
  
 ### Object properties check (works with associative arrays as well)
 
- - `hasKey($key)`
- - `hasNotKey($key)`
+ - `hasKey(string $key)`
  - `hasKeys(...$keys)`
  - `hasNotKeys(...$keys)`
  - `hasAnyOfKeys(...$keys)`
  - `hasNotAnyOfKeys(...$keys)`
- - `keyIs($key, $value)`
- - `keyIsNot($key, $value)`
- - `keyIsAnyOf($key, array values)`
- - `keyIsNotAnyOf($key, array $values)`
- - `keyIsType($key, $type)`
- - `keyInNotType($key, $type)`
- - `keyApply($key, callable $predicate)` Return a predicate that applies a predicate to a key of the subject
- - `notKeyApply($key, callable $predicate)`
+ - `keyIs(string $key, $value)`
+ - `keyIsNot(string $key, $value)`
+ - `keyIsAnyOf(string $key, array values)`
+ - `keyIsNotAnyOf(string $key, array $values)`
+ - `keyIsType(string $key, string $type)`
+ - `keyInNotType(string $key, string $type)`
+ - `keyApply(string $key, callable $predicate)` Return a predicate that applies a predicate to a key of the subject
+ - `notKeyApply(string $key, callable $predicate)`
  
 ### Object methods check
 
- - `hasMethod($method)`
- - `hasNotMethod($method)`
- - `methodReturn($method, $value)`
- - `methodNotReturn($method, $value)`
- - `methodReturnAnyOf($method, array $values)`
- - `methodNotReturnAnyOf($method, array $values)`
- - `methodReturnType($method, $type)`
- - `methodNotReturnType($method, $type)`
- - `methodReturnEmpty($method)`
- - `methodReturnNotEmpty($method)`
- - `methodReturnApply($method, callable $predicate)` Return a predicate that applies a predicate return value of given method of the subject
+ - `hasMethod(string $method)`
+ - `hasNotMethod(string $method)`
+ - `methodReturn(string $method, $value)`
+ - `methodNotReturn(string $method, $value)`
+ - `methodReturnAnyOf(string $method, array $values)`
+ - `methodNotReturnAnyOf(string $method, array $values)`
+ - `methodReturnType(string $method, string $type)`
+ - `methodNotReturnType(string $method, string $type)`
+ - `methodReturnEmpty(string $method)`
+ - `methodReturnNotEmpty(string $method)`
+ - `methodReturnApply(string $method, callable $predicate)` Return a predicate that applies a predicate return value of given method of the subject
 
  
 ### Bulk
@@ -190,8 +197,8 @@ Here a list of all the functions currently provided by library (namespace omitte
 - `pool(...$predicates)` Return a predicate that returns `true` when any of the given predicates returns true
 - `combineCallbacks(array $predicates)` Like `combine()` but accepts an array of predicates
 - `poolCallbacks(...$predicates)` Like `pool()` but accepts an array of predicates
-- `combineMap($predicates)` Takes a map of predicates and return a predicates that applies to a map value, returns true when all the predicates return true
-- `poolMap($predicates)` Like combineMap, but the returned predicates return `true` when any the predicates returns `true`
+- `combineMap(array $predicates)` Takes a map of predicates and return a predicates that applies to a map value, returns true when all the predicates return true
+- `poolMap(array $predicates)` Like combineMap, but the returned predicates return `true` when any the predicates returns `true`
  
 ## Quite Complex Example
 
