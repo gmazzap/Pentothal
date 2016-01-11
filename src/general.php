@@ -31,17 +31,6 @@ function never()
 }
 
 /**
- * @param callable $callable
- * @return \Closure
- */
-function negate(callable $callable)
-{
-    return function ($value) use ($callable) {
-        return ! variadicCallBoolVal($callable, func_get_args());
-    };
-}
-
-/**
  * @return \Closure
  */
 function isEmpty()

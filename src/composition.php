@@ -11,6 +11,17 @@
 namespace Pentothal;
 
 /**
+ * @param callable $callable
+ * @return \Closure
+ */
+function negate(callable $callable)
+{
+    return function ($value) use ($callable) {
+        return ! variadicCallBoolVal($callable, func_get_args());
+    };
+}
+
+/**
  * @param array $callbacks
  * @return \Closure
  */

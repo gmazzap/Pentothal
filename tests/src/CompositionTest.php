@@ -19,8 +19,35 @@ use Pentothal\Tests\Stubs;
  * @license http://opensource.org/licenses/MIT MIT
  * @package Pentothal
  */
-final class CombineTest extends PHPUnit_Framework_TestCase
+final class CompositionTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @dataProvider negateDataProvider
+     * @param mixed $value
+     * @param bool  $expected
+     */
+    public function testNegate($value, $expected)
+    {
+        $pass = function ($arg) {
+            return $arg;
+        };
+
+        $negate = P\negate($pass);
+        $expected ? assertTrue($negate($value)) : assertFalse($negate($value));
+    }
+
+    public function negateDataProvider()
+    {
+        return [
+            [true, false],
+            [false, true],
+            ['', true],
+            [0, true],
+            [null, true],
+            [1, false],
+        ];
+    }
 
     /**
      * @dataProvider combineDataProvider
