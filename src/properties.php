@@ -216,6 +216,7 @@ function hasValue($value)
             $clone = clone $item;
             unset($item);
             ($clone instanceof \Traversable) or $clone = extractObjectVars($clone);
+            $item = $clone;
         }
 
         foreach ($item as $element) {
