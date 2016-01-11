@@ -20,9 +20,12 @@ function hasMethod($method)
         return never();
     }
 
-    return combine(isObject(), function ($object) use ($method) {
-        return method_exists($object, $method);
-    });
+    return combine(
+        pool(isObject(), combine(isString(), 'class_exists')),
+        function ($object) use ($method) {
+            return method_exists($object, $method);
+        }
+    );
 }
 
 /**
@@ -42,6 +45,7 @@ function hasNotMethod($method)
 function methodReturn($method, $value)
 {
     return combine(
+        isObject(),
         hasMethod($method),
         function ($object) use ($method, $value) {
             $args = array_slice(func_get_args(), 1);
@@ -73,6 +77,7 @@ function methodReturnAnyOf($method, array $values)
     }
 
     return combine(
+        isObject(),
         hasMethod($method),
         function ($object) use ($method, $values) {
             $args = array_slice(func_get_args(), 1);
@@ -100,6 +105,7 @@ function methodNotReturnAnyOf($method, array $values)
 function methodReturnType($method, $type)
 {
     return combine(
+        isObject(),
         hasMethod($method),
         function ($object) use ($method, $type) {
             $args = array_slice(func_get_args(), 1);
@@ -129,6 +135,7 @@ function methodNotReturnType($method, $type)
 function methodReturnEmpty($method)
 {
     return combine(
+        isObject(),
         hasMethod($method),
         function ($object) use ($method) {
             $args = array_slice(func_get_args(), 1);
@@ -156,6 +163,7 @@ function methodReturnNotEmpty($method)
 function methodReturnApply($method, callable $callback)
 {
     return combine(
+        isObject(),
         hasMethod($method),
         function ($object) use ($method, $callback) {
             $args = array_slice(func_get_args(), 1);
