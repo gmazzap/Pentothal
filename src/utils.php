@@ -137,7 +137,7 @@ function extractObjectVars($object) {
     if (is_null($object)) {
         return [];
     } elseif (! is_object($object)) {
-        throw new \InvalidArgumentException('Invalid object.');
+        throw new \InvalidArgumentException('Trying to extract object vars from a non-object.');
     }
 
     $getter = \Closure::bind(function() {
