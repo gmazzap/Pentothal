@@ -140,6 +140,10 @@ function extractObjectVars($object) {
         throw new \InvalidArgumentException('Trying to extract object vars from a non-object.');
     }
 
+    if ($object instanceof \stdClass) {
+        return get_object_vars($object);
+    }
+
     $getter = \Closure::bind(function() {
         return get_object_vars($this);
     }, $object, get_class($object));
