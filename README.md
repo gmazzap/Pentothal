@@ -150,17 +150,17 @@ Here a list of all the functions currently provided by library (namespace omitte
  - `hasValue($value)` Return a predicate that checks an array or a traversable object to find an element equal to value given
  - `hasNotValue($value)`
  - `hasValues(array $value)`
- - `hasNotValues(array $value)`
- - `hasAnyOfValues(array $value)`
- - `hasNotAnyOfValues(array $value)`
+ - `hasNotValues(array $values)`
+ - `hasAnyOfValues(array $values)`
+ - `hasNotAnyOfValues(array $values)`
  
 ### Object properties check (works with associative arrays as well)
 
  - `hasKey(string $key)`
- - `hasKeys(...$keys)`
- - `hasNotKeys(...$keys)`
- - `hasAnyOfKeys(...$keys)`
- - `hasNotAnyOfKeys(...$keys)`
+ - `hasKeys(array $keys)`
+ - `hasNotKeys(array $keys)`
+ - `hasAnyOfKeys(array $keys)`
+ - `hasNotAnyOfKeys(array $keys)`
  - `keyIs(string $key, $value)`
  - `keyIsNot(string $key, $value)`
  - `keyIsAnyOf(string $key, array values)`
