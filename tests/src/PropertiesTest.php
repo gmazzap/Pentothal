@@ -13,7 +13,6 @@ namespace Pentothal\Tests;
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
 
-
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>
  * @license http://opensource.org/licenses/MIT MIT
