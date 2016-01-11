@@ -214,7 +214,9 @@ function hasValue($value)
         /** @var object|array $item */
         if (is_object($item)) {
             $clone = clone $item;
-            $clone instanceof \Traversable or $clone = get_object_vars($clone);
+            unset($item);
+            ($clone instanceof \Traversable) or $clone = get_object_vars($clone);
+            $item = $clone;
         }
 
         foreach ($item as $element) {
