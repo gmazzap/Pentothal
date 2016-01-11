@@ -12,7 +12,6 @@ namespace Pentothal\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
-use Pentothal\Tests\Stubs;
 
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>
@@ -21,7 +20,6 @@ use Pentothal\Tests\Stubs;
  */
 final class UtilsTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider variadicCallDataProvider
      * @param array $args
@@ -57,7 +55,7 @@ final class UtilsTest extends PHPUnit_Framework_TestCase
         $function = function () {
             $args = func_get_args();
             if (empty($args)) {
-                return null;
+                return;
             }
 
             return array_pop($args);
@@ -79,7 +77,7 @@ final class UtilsTest extends PHPUnit_Framework_TestCase
             [[false, ''], false],
             [[false, 0, 'true'], true],
             [[false, 0, 1, []], false],
-            [[false, 0, 1, [], (object)['a' => 'b']], true],
+            [[false, 0, 1, [], (object) ['a' => 'b']], true],
         ];
     }
 
@@ -102,7 +100,7 @@ final class UtilsTest extends PHPUnit_Framework_TestCase
             [0.9999, 0],
             [new Stubs\CountThree(), 3],
             [['a', 1, [], null], 4],
-            [(object)['a' => 'b', 'c' => 'd'], 1],
+            [(object) ['a' => 'b', 'c' => 'd'], 1],
             [[], 0],
             [null, 0],
             [new \ArrayObject(['foo', 'bar']), 2]
@@ -125,7 +123,7 @@ final class UtilsTest extends PHPUnit_Framework_TestCase
         return [
             [['foo' => 'bar'], 'foo', 'bar'],
             [['foo' => ['a', 'b', 'c']], 'foo', ['a', 'b', 'c']],
-            [(object)['foo' => ['a', 'b', 'c']], 'foo', ['a', 'b', 'c']],
+            [(object) ['foo' => ['a', 'b', 'c']], 'foo', ['a', 'b', 'c']],
             [new \ArrayObject(['foo' => ['a', 'b', 'c']]), 'foo', ['a', 'b', 'c']],
         ];
     }
@@ -139,6 +137,5 @@ final class UtilsTest extends PHPUnit_Framework_TestCase
         assertSame(0, $stub->n);
         assertSame(1, $incremented1->n);
         assertSame(3, $incremented3->n);
-
     }
 }

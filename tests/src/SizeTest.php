@@ -12,7 +12,6 @@ namespace Pentothal\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
-use Pentothal\Tests\Stubs;
 
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>
@@ -21,7 +20,6 @@ use Pentothal\Tests\Stubs;
  */
 final class SizeTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider sizeDataProvider
      * @param      $value
@@ -48,8 +46,8 @@ final class SizeTest extends PHPUnit_Framework_TestCase
             [['', '', ''], 3, true],
             [[1, 2, 3], 3, true],
             [['a' => 1, 'b' => 2, 'c' => 3], 3, true],
-            [(object)['a' => 'b', 'b' => 'c'], 1, true],
-            [(object)['a' => 'b', 'b' => 'c'], 2, false],
+            [(object) ['a' => 'b', 'b' => 'c'], 1, true],
+            [(object) ['a' => 'b', 'b' => 'c'], 2, false],
             [new \ArrayObject(['a' => 'b', 'b' => 'c']), 1, false],
             [new \ArrayObject(['a' => 'b', 'b' => 'c']), 2, true],
             [new Stubs\CountThree(), 3, true],
@@ -453,5 +451,4 @@ final class SizeTest extends PHPUnit_Framework_TestCase
             [['a', 'b', 'c'], [3, 20], false],
         ];
     }
-
 }

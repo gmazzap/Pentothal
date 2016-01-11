@@ -20,7 +20,6 @@ use Pentothal as P;
  */
 final class MiscTest extends PHPUnit_Framework_TestCase
 {
-
     public function testNestedPoolCombine()
     {
         $countableOne = new \ArrayObject(['foo' => 'bar']);
@@ -44,7 +43,7 @@ final class MiscTest extends PHPUnit_Framework_TestCase
             'd' => $string1, // filtered out
             'e' => $string3,
             'f' => $number1,
-            'g' => $number3 // filtered out
+            'g' => $number3, // filtered out
         ];
 
         $expectedIn = [
@@ -57,7 +56,7 @@ final class MiscTest extends PHPUnit_Framework_TestCase
             'b' => $countableTwo,
             'c' => $plainObj,
             'd' => $string1,
-            'g' => $number3
+            'g' => $number3,
         ];
 
         assertSame($expectedIn, array_filter($list, $filter));

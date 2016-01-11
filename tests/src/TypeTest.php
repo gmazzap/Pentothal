@@ -12,7 +12,6 @@ namespace Pentothal\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
-use Pentothal\Tests\Stubs;
 
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>
@@ -21,7 +20,6 @@ use Pentothal\Tests\Stubs;
  */
 final class TypeTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider isTypeProvider
      * @param string $type

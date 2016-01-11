@@ -20,7 +20,6 @@ use Pentothal as P;
  */
 final class FilterTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider stringsTypesDataProvider
      * @param string $value

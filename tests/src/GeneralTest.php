@@ -20,7 +20,6 @@ use Pentothal as P;
  */
 final class GeneralTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider mixedDataProvider
      * @param $value

@@ -12,7 +12,6 @@ namespace Pentothal\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Pentothal as P;
-use Pentothal\Tests\Stubs;
 
 /**
  * @author  Giuseppe Mazzapica <giuseppe.mazzapica@gmail.com>
@@ -21,7 +20,6 @@ use Pentothal\Tests\Stubs;
  */
 final class CompositionTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider negateDataProvider
      * @param mixed $value
@@ -288,5 +286,4 @@ final class CompositionTest extends PHPUnit_Framework_TestCase
             [70, false],
         ];
     }
-
 }

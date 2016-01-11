@@ -20,7 +20,6 @@ use Pentothal as P;
  */
 final class ComparisonTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider sameDataProvider
      * @param mixed $value

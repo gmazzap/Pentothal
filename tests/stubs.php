@@ -11,7 +11,6 @@ namespace Pentothal\Tests\Stubs;
 
 class CountThree implements \Countable
 {
-
     public function count()
     {
         return 3;
@@ -20,7 +19,6 @@ class CountThree implements \Countable
 
 class Incrementable
 {
-
     public $n = 0;
 
     public function increment($increment = 1)
@@ -33,7 +31,6 @@ class Incrementable
 
 class Aaa
 {
-
     public function __toString()
     {
         return 'aaa';

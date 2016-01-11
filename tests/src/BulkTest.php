@@ -20,7 +20,6 @@ use Pentothal as P;
  */
 final class BulkTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider bulkDataProvider
      * @param array    $array
