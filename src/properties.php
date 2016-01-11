@@ -215,7 +215,7 @@ function hasValue($value)
         if (is_object($item)) {
             $clone = clone $item;
             unset($item);
-            ($clone instanceof \Traversable) or $clone = get_object_vars($clone);
+            ($clone instanceof \Traversable) or $clone = extractObjectVars($clone);
             $item = $clone;
         }
 
