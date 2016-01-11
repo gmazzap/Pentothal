@@ -391,12 +391,12 @@ final class PropertiesTest extends PHPUnit_Framework_TestCase
             [['foo', 'bar', 'baz'], ['foo', ['baz']], false],
             [(object) ['foo' => 'bar', 'bar' => 'baz'], ['bar'], true],
             [(object) ['foo' => 'bar', 'bar' => 'baz'], ['bar', 'baz'], true],
-            [(object) ['bar', 'bar' => 'baz'], ['bar', 'baz'], true],
-            [(object) ['bar', 'bar' => 'baz'], ['bar', 'baz', ''], false],
-            [(object) ['foo', 'bar', 'baz'], ['foo', 'bar', 'baz'], true],
-            [(object) ['foo', 'bar', 'baz'], ['foo', 'baz'], true],
-            [(object) ['foo', 'bar', 'baz'], [0, 'foo', 'baz'], false],
-            [(object) ['foo', 'bar', 'baz'], ['foo', ['baz']], false],
+            [(object) ['a' => 'bar', 'bar' => 'baz'], ['bar', 'baz'], true],
+            [(object) ['a' => 'bar', 'bar' => 'baz'], ['bar', 'baz', ''], false],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['foo', 'bar', 'baz'], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['foo', 'baz'], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], [0, 'foo', 'baz'], false],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['foo', ['baz']], false],
         ];
     }
 
@@ -435,14 +435,14 @@ final class PropertiesTest extends PHPUnit_Framework_TestCase
             [['foo', 'bar', 'baz'], ['x', 'y', 'foo'], true],
             [['foo', 'bar', 'baz', []], ['x', 'y', []], true],
             [['foo', 'bar', 'baz'], ['x', 'y', []], false],
-            [(object) ['foo', 'bar', 'baz'], ['foo'], true],
-            [(object) ['foo', 'bar', 'baz'], ['foo', 'bar'], true],
-            [(object) ['foo', 'bar', 'baz'], ['foo', 'bar', 'baz'], true],
-            [(object) ['foo', 'bar', 'baz'], ['x', 'y', 'foo'], true],
-            [(object) ['foo', 'bar', 'baz', []], ['x', 'y', []], true],
-            [(object) ['foo', 'bar', 'baz'], ['x', 'y', []], false],
-            [new \ArrayObject(['foo', 'bar', 'baz']), ['foo'], true],
-            [new \ArrayObject(['foo', 'bar', 'baz']), ['foo', 'bar'], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['foo'], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['foo', 'bar'], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['foo', 'bar', 'baz'], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['x', 'y', 'foo'], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz', 'd' => []], ['x', 'y', []], true],
+            [(object) ['a' => 'foo', 'b' => 'bar', 'c' => 'baz'], ['x', 'y', []], false],
+            [new \ArrayObject(['a' => 'foo', 'b' => 'bar', 'c' => 'baz']), ['foo'], true],
+            [new \ArrayObject(['a' => 'foo', 'b' => 'bar', 'c' => 'baz']), ['foo', 'bar'], true],
         ];
     }
 }
