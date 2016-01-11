@@ -13,7 +13,7 @@ A "functional predicate" is a function that receives one or more arguments (subj
 
 **This library is a collections of functions that return functional predicates**.
 
-## Why?
+# Why?
 
 In PHP there are some functions like `array_map`, `array_filter`, and so on, that take a functional predicate
 as argument.
@@ -209,6 +209,8 @@ Here a list of all the functions currently provided by library (namespace omitte
 # Quite complex example
 
 ```php
+use Pentothal as P;
+
 // some example data
 $countableOne = new \ArrayObject(['foo' => 'bar']);
 $countableTwo = new \ArrayObject(['a' => 'a', 'b' => 'b']);
