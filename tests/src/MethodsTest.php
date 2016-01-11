@@ -50,7 +50,7 @@ final class MethodsTest extends PHPUnit_Framework_TestCase
     {
         return [
             [new \ArrayObject(), 'offsetExists', true],
-            [\ArrayObject::class, 'offsetExists', true],
+            ['\ArrayObject', 'offsetExists', true],
             [new \ArrayObject(), 'get', false],
             [new \ArrayObject(), '', false],
             [[], '', false],
@@ -204,7 +204,7 @@ final class MethodsTest extends PHPUnit_Framework_TestCase
             [new \ArrayObject(['foo' => 'bar']), 'foo', 'array', false],
             [new \ArrayObject(['foo' => ['bar']]), 'foo', 'array', true],
             [new \ArrayObject(['foo' => (object) ['bar']]), 'foo', 'object', true],
-            [new \ArrayObject(['foo' => (object) ['bar']]), 'foo', \stdClass::class, true],
+            [new \ArrayObject(['foo' => (object) ['bar']]), 'foo', '\stdClass', true],
         ];
     }
 
