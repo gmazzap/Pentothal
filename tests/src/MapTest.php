@@ -21,60 +21,76 @@ use Pentothal as P;
 final class MapTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @dataProvider combineMapDataProvider
-     * @param array $subject
-     * @param bool  $expected
+     * @dataProvider mapDataProvider
+     * @param array|object $predicates
+     * @param array|object $subject
      */
-    public function testCombineMap($subject, $expected)
+    public function testMap($predicates, $subject)
     {
-        $map = [
-            'name'   => 'is_string',
-            'age'    => 'is_int',
-            'accept' => 'is_bool',
+        $expected = [
+            'name'   => true,
+            'email'  => true,
+            'phone'  => false,
+            'phone2' => true,
+            'x'      => true,
         ];
 
-        $combine = P\combineMap($map);
-
-        $expected ? assertTrue($combine($subject)) : assertFalse($combine($subject));
-    }
-
-    public function combineMapDataProvider()
-    {
-        return [
-            [['name' => 'Giuseppe', 'age' => 33, 'accept' => true], true],
-            [['name' => 'John', 'age' => 20, 'accept' => 1], false],
-            [['name' => 'Jane', 'age' => 0, 'accept' => false], true],
-            [['full name' => 'John', 'age' => 20, 'accept' => true], false],
-            [true, false],
-        ];
+        assertSame($expected, P\map($predicates, $subject));
     }
 
     /**
-     * @dataProvider poolMapDataProvider
-     * @param array $subject
-     * @param bool  $expected
+     * @dataProvider mapDataProvider
+     * @param array|object $predicates
+     * @param array|object $subject
      */
-    public function testPoolMap($subject, $expected)
+    public function testMapInverse($predicates, $subject)
     {
-        $map = [
-            'name'   => 'is_string',
-            'age'    => 'is_int',
-            'accept' => 'is_bool',
+        $expected = [
+            'name'   => false,
+            'email'  => false,
+            'phone'  => true,
+            'phone2' => false,
+            'x'      => false,
         ];
 
-        $combine = P\poolMap($map);
-
-        $expected ? assertTrue($combine($subject)) : assertFalse($combine($subject));
+        assertSame($expected, P\mapInverse($predicates, $subject));
     }
 
-    public function poolMapDataProvider()
+    public function mapDataProvider()
     {
         return [
-            [['name' => 'Giuseppe', 'age' => 33, 'accept' => true], true],
-            [['name' => 'John', 'age' => 20, 'accept' => 1], true],
-            [['name' => 1, 'age' => false, 'accept' => false], true],
-            [['full name' => 0, 'age' => '', 'accept' => 1], false],
-            [true, false],
+            [
+                [
+                    'name'   => P\combine(P\isString(), P\isNotEmpty()),
+                    'email'  => P\isEmail(),
+                    'phone'  => P\combine(P\isString(), P\startWith('+'), P\sizeMin(9)),
+                    'phone2' => P\combine(P\isString(), P\startWith('+'), P\sizeMin(9)),
+                    'meh'    => 'meh',
+                ],
+                (object) [
+                    'name'   => 'John Doe',
+                    'email'  => 'john.doe@johndoe.me',
+                    'phone'  => '---',
+                    'phone2' => '+ 123456789',
+                    'x'      => '---',
+                ],
+            ],
+            [
+                new \ArrayObject([
+                    'name'   => P\combine(P\isString(), P\isNotEmpty()),
+                    'email'  => P\isEmail(),
+                    'phone'  => P\combine(P\isString(), P\startWith('+'), P\sizeMin(9)),
+                    'phone2' => P\combine(P\isString(), P\startWith('+'), P\sizeMin(9)),
+                    'meh'    => 'meh',
+                ]),
+                [
+                    'name'   => 'John Doe',
+                    'email'  => 'john.doe@johndoe.me',
+                    'phone'  => '---',
+                    'phone2' => '+ 123456789',
+                    'x'      => '---',
+                ]
+            ]
         ];
     }
 }
