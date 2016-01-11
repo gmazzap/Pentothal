@@ -168,7 +168,6 @@ Here a list of all the functions currently provided by library (namespace omitte
  - `keyIsType(string $key, string $type)`
  - `keyInNotType(string $key, string $type)`
  - `keyApply(string $key, callable $predicate)` Return a predicate that applies a predicate to a key of the subject
- - `notKeyApply(string $key, callable $predicate)`
  
 ### Object methods check
 
