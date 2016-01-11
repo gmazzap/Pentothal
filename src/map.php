@@ -34,9 +34,9 @@ namespace Pentothal;
  * use Pentothal as P;
  *
  * $predicates = [
- *   'name'  => combine(P\isString(), P\isNotEmpty()),
+ *   'name'  => P\combine(P\isString(), P\isNotEmpty()),
  *   'email' => P\isEmail(),
- *   'phone' => combine(P\isString(), P\startWith('+'), P\sizeMin(5)),
+ *   'phone' => P\combine(P\isString(), P\startWith('+'), P\sizeMin(5)),
  * ];
  *
  * $user = [
@@ -45,7 +45,7 @@ namespace Pentothal;
  *   'phone' => '---',
  * ];
  *
- * $correct = map($predicates, $user);
+ * $correct = P\map($predicates, $user);
  *
  * var_export($errors); // array('name' => true, 'email' => true, 'phone' => false)
  * ?>
@@ -84,9 +84,9 @@ function map($predicateMap, $subjectMap)
  * use Pentothal as P;
  *
  * $predicates = [
- *   'name'  => combine(P\isString(), P\isNotEmpty()),
+ *   'name'  => P\combine(P\isString(), P\isNotEmpty()),
  *   'email' => P\isEmail(),
- *   'phone' => combine(P\isString(), P\startWith('+'), P\sizeMin(5)),
+ *   'phone' => P\combine(P\isString(), P\startWith('+'), P\sizeMin(5)),
  * ];
  *
  * $user = [
@@ -95,7 +95,7 @@ function map($predicateMap, $subjectMap)
  *   'phone' => '---',
  * ];
  *
- * $errors = mapInverse($predicates, $user);
+ * $errors = P\mapInverse($predicates, $user);
  *
  * var_export($errors); // array('name' => false, 'email' => false, 'phone' => true)
  * ?>
