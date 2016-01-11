@@ -14,10 +14,9 @@ namespace Pentothal;
  * Applies a predicates map to a subject map.
  *
  * Takes a map of predicates and a subject in form of map, then apply to any item in the subject
- * map
  * the predicate that has the same key in the predicate map.
- * The resulting array is composed by all the key of subject set to `true` if the related predicate
- * returned `true` and `false` if  if the related predicate returned `false`.
+ * The resulting array is composed by all the keys of subject set to `true` if the related predicate
+ * returned `true` and `false` if the related predicate returned `false`.
  * All subject items without related predicate are `true` in the result.
  * Any item that is not callable in the predicate map is ignored.
  *
@@ -70,10 +69,9 @@ function map($predicateMap, $subjectMap)
  * Apply an inverse predicates map to a subject map.
  *
  * Takes a map of predicates and a subject in form of map, then apply to any item in the subject
- * map
  * the inverse of the predicate that has the same key in the predicate map.
- * The resulting array is composed by all the key of subject set to `true` if the related predicate
- * returned `false` and `false` if  if the related predicate returned `true`.
+ * The resulting array is composed by all the keys of subject set to `true` if the related predicate
+ * returned `false` and `false` if the related predicate returned `true`.
  * All subject items without related predicate are `false` in the result.
  * Any item that is not callable in the predicate map is ignored.
  *
