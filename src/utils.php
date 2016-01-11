@@ -98,5 +98,9 @@ function callOnClone($object, $method, array $args = [])
     $clone = clone $object;
     $callback = [$clone, $method];
 
-    return variadicCall($callback, $args);
+    try {
+        return variadicCall($callback, $args);
+    } catch (\Exception $e) {
+        return false;
+    }
 }
