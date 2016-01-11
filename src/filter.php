@@ -10,7 +10,7 @@
 namespace Pentothal;
 
 /**
- * @param int     $filter
+ * @param int       $filter
  * @param array|int $options
  * @return \Closure
  */
