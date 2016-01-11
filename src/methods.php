@@ -40,17 +40,16 @@ function hasNotMethod($method)
 /**
  * @param string $method
  * @param mixed  $value
+ * @param array  $methodArgs
  * @return \Closure
  */
-function methodReturn($method, $value)
+function methodReturn($method, $value, array $methodArgs = [])
 {
     return combine(
         isObject(),
         hasMethod($method),
-        function ($object) use ($method, $value) {
-            $args = array_slice(func_get_args(), 1);
-
-            return $value === callOnClone($object, $method, $args);
+        function ($object) use ($method, $value, $methodArgs) {
+            return $value === callOnClone($object, $method, $methodArgs);
         }
     );
 }
@@ -58,19 +57,21 @@ function methodReturn($method, $value)
 /**
  * @param string $method
  * @param mixed  $value
+ * @param array  $methodArgs
  * @return \Closure
  */
-function methodNotReturn($method, $value)
+function methodNotReturn($method, $value, array $methodArgs = [])
 {
-    return negate(methodReturn($method, $value));
+    return negate(methodReturn($method, $value, $methodArgs));
 }
 
 /**
  * @param string $method
  * @param array  $values
+ * @param array  $methodArgs
  * @return \Closure
  */
-function methodReturnAnyOf($method, array $values)
+function methodReturnAnyOf($method, array $values, array $methodArgs = [])
 {
     if (empty($values)) {
         return never();
@@ -79,10 +80,8 @@ function methodReturnAnyOf($method, array $values)
     return combine(
         isObject(),
         hasMethod($method),
-        function ($object) use ($method, $values) {
-            $args = array_slice(func_get_args(), 1);
-
-            return in_array(callOnClone($object, $method, $args), $values, true);
+        function ($object) use ($method, $values, $methodArgs) {
+            return in_array(callOnClone($object, $method, $methodArgs), $values, true);
         }
     );
 }
@@ -90,28 +89,29 @@ function methodReturnAnyOf($method, array $values)
 /**
  * @param string $method
  * @param array  $values
+ * @param array  $methodArgs
  * @return \Closure
  */
-function methodNotReturnAnyOf($method, array $values)
+function methodNotReturnAnyOf($method, array $values, array $methodArgs = [])
 {
-    return negate(methodReturnAnyOf($method, $values));
+    return negate(methodReturnAnyOf($method, $values, $methodArgs));
 }
 
 /**
  * @param string        $method
  * @param string|object $type
+ * @param array         $methodArgs
  * @return \Closure
  */
-function methodReturnType($method, $type)
+function methodReturnType($method, $type, array $methodArgs = [])
 {
     return combine(
         isObject(),
         hasMethod($method),
-        function ($object) use ($method, $type) {
-            $args = array_slice(func_get_args(), 1);
+        function ($object) use ($method, $type, $methodArgs) {
             /** @var \Closure $typeCheck */
             $typeCheck = isType($type);
-            $return = callOnClone($object, $method, $args);
+            $return = callOnClone($object, $method, $methodArgs);
 
             return $typeCheck($return);
         }
@@ -121,25 +121,26 @@ function methodReturnType($method, $type)
 /**
  * @param string        $method
  * @param string|object $type
+ * @param array         $methodArgs
  * @return \Closure
  */
-function methodNotReturnType($method, $type)
+function methodNotReturnType($method, $type, array $methodArgs = [])
 {
-    return negate(methodReturnType($method, $type));
+    return negate(methodReturnType($method, $type, $methodArgs));
 }
 
 /**
  * @param string $method
+ * @param array  $methodArgs
  * @return \Closure
  */
-function methodReturnEmpty($method)
+function methodReturnEmpty($method, array $methodArgs = [])
 {
     return combine(
         isObject(),
         hasMethod($method),
-        function ($object) use ($method) {
-            $args = array_slice(func_get_args(), 1);
-            $return = callOnClone($object, $method, $args);
+        function ($object) use ($method, $methodArgs) {
+            $return = callOnClone($object, $method, $methodArgs);
 
             return empty($return);
         }
@@ -148,27 +149,27 @@ function methodReturnEmpty($method)
 
 /**
  * @param string $method
+ * @param array  $methodArgs
  * @return \Closure
  */
-function methodReturnNotEmpty($method)
+function methodReturnNotEmpty($method, array $methodArgs = [])
 {
-    return negate(methodReturnEmpty($method));
+    return negate(methodReturnEmpty($method, $methodArgs));
 }
 
 /**
  * @param string   $method
  * @param callable $callback
+ * @param array    $methodArgs
  * @return \Closure
  */
-function methodReturnApply($method, callable $callback)
+function methodReturnApply($method, callable $callback, array $methodArgs = [])
 {
     return combine(
         isObject(),
         hasMethod($method),
-        function ($object) use ($method, $callback) {
-            $args = array_slice(func_get_args(), 1);
-
-            return $callback(callOnClone($object, $method, $args));
+        function ($object) use ($method, $callback, $methodArgs) {
+            return $callback(callOnClone($object, $method, $methodArgs));
         }
     );
 }
