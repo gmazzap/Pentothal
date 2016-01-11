@@ -42,11 +42,12 @@ function hasNotKey($key)
 }
 
 /**
+ * @param string[] $keys
  * @return \Closure
  */
-function hasKeys()
+function hasKeys(array $keys)
 {
-    $keys = array_filter(func_get_args(), 'is_string');
+    $keys = array_filter($keys, 'is_string');
     if (empty($keys)) {
         return never();
     }
@@ -55,24 +56,21 @@ function hasKeys()
 }
 
 /**
+ * @param string[] $keys
  * @return \Closure
  */
-function hasNotKeys()
+function hasNotKeys(array $keys)
 {
-    $keys = array_filter(func_get_args(), 'is_string');
-    if (empty($keys)) {
-        return never();
-    }
-
-    return combineFactory($keys, '\\Pentothal\\hasNotKey');
+    return negate(hasKeys($keys));
 }
 
 /**
+ * @param string[] $keys
  * @return \Closure
  */
-function hasAnyOfKeys()
+function hasAnyOfKeys(array $keys)
 {
-    $keys = array_filter(func_get_args(), 'is_string');
+    $keys = array_filter($keys, 'is_string');
     if (empty($keys)) {
         return never();
     }
@@ -81,16 +79,12 @@ function hasAnyOfKeys()
 }
 
 /**
+ * @param string[] $keys
  * @return \Closure
  */
-function hasNotAnyOfKeys()
+function hasNotAnyOfKeys(array $keys)
 {
-    $keys = array_filter(func_get_args(), 'is_string');
-    if (empty($keys)) {
-        return never();
-    }
-
-    return poolFactory($keys, '\\Pentothal\\hasNotKey');
+    return negate(hasAnyOfKeys($keys));
 }
 
 /**
@@ -108,7 +102,7 @@ function keyIs($key, $value)
         hasKey($key),
         function ($item) use ($key, $value) {
 
-            return polymorphicKeyValue($item, $key) === $item;
+            return polymorphicKeyValue($item, $key) === $value;
         }
     );
 }
@@ -208,16 +202,6 @@ function keyApply($key, callable $callback)
 }
 
 /**
- * @param string   $key
- * @param callable $callback
- * @return \Closure
- */
-function notKeyApply($key, callable $callback)
-{
-    return negate(keyApply($key, $callback));
-}
-
-/**
  * @param mixed $value
  * @return \Closure
  */
@@ -229,8 +213,8 @@ function hasValue($value)
         }
         /** @var object|array $item */
         if (is_object($item)) {
-            $item = clone $item;
-            $item instanceof \Traversable or $item = get_object_vars($item);
+            $clone = clone $item;
+            $clone instanceof \Traversable or $clone = get_object_vars($clone);
         }
 
         foreach ($item as $element) {
@@ -253,11 +237,11 @@ function hasNotValue($value)
 }
 
 /**
+ * @param array $values
  * @return \Closure
  */
-function hasValues()
+function hasValues(array $values)
 {
-    $values = func_get_args();
     if (empty($values)) {
         return never();
     }
@@ -266,24 +250,20 @@ function hasValues()
 }
 
 /**
+ * @param array $values
  * @return \Closure
  */
-function hasNotValues()
+function hasNotValues(array $values)
 {
-    $values = func_get_args();
-    if (empty($values)) {
-        return never();
-    }
-
-    return combineFactory($values, '\\Pentothal\\hasNotValue');
+    return negate(hasValues($values));
 }
 
 /**
+ * @param array $values
  * @return \Closure
  */
-function hasAnyOfValues()
+function hasAnyOfValues(array $values)
 {
-    $values = func_get_args();
     if (empty($values)) {
         return never();
     }
@@ -292,14 +272,10 @@ function hasAnyOfValues()
 }
 
 /**
+ * @param array $values
  * @return \Closure
  */
-function hasNotAnyOfValues()
+function hasNotAnyOfValues(array $values)
 {
-    $values = func_get_args();
-    if (empty($values)) {
-        return never();
-    }
-
-    return poolFactory($values, '\\Pentothal\\hasNotValue');
+    return negate(hasAnyOfValues($values));
 }
