@@ -268,7 +268,7 @@ final class PropertiesTest extends PHPUnit_Framework_TestCase
             [['foo' => null, 'bar' => new \stdClass()], 'foo', 'null', true],
             [['foo' => null, 'bar' => new \stdClass()], 'foo', null, false],
             [['foo' => 1.0, 'bar' => new \stdClass()], 'bar', 'stdClass', true],
-            [['foo' => '', 'bar' => new Stubs\CountThree()], 'bar', Stubs\CountThree::class, true],
+            [['foo' => '', 'bar' => new Stubs\CountThree()], 'bar', '\\Pentothal\\Tests\\Stubs\\CountThree', true],
             [['foo' => '', 'bar' => new Stubs\CountThree()], 'bar', 'Countable', true],
             [['foo' => '', 'bar' => new Stubs\CountThree()], 'bar', 'object', true],
             [['foo' => 'bar', 'bar' => ['baz']], 'foo', 'array', false],
