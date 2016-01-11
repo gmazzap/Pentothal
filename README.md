@@ -1,6 +1,15 @@
 Pentothal
 =========
 
+-------
+
+[![travis-ci status](https://img.shields.io/travis/Giuseppe-Mazzapica/Pentothal.svg?style=flat-square)](https://travis-ci.org/Giuseppe-Mazzapica/Pentothal)
+[![codecov.io](https://img.shields.io/codecov/c/github/Giuseppe-Mazzapica/Pentothal.svg?style=flat-square)](http://codecov.io/github/Giuseppe-Mazzapica/Pentothal?branch=master)
+[![license](https://img.shields.io/packagist/l/gmazzap/pentothal.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![release](https://img.shields.io/github/release/Giuseppe-Mazzapica/Pentothal.svg?style=flat-square)](https://github.com/Giuseppe-Mazzapica/Pentothal/releases/latest)
+
+-------
+
 > Higher order predicates library.
 
 ----------------------------------
