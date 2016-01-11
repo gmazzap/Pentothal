@@ -60,7 +60,7 @@ function polymorphicSize($value)
         case 'double' :
         case 'integer' :
         case 'resource' :
-            $size = (int) $value;
+            $size = (int)$value;
             break;
         case 'array' :
             $size = count($value);
@@ -103,4 +103,46 @@ function callOnClone($object, $method, array $args = [])
     $callback = [$clone, $method];
 
     return variadicCall($callback, $args);
+}
+
+/**
+ * @param array|object $map
+ * @return array
+ */
+function mapAsArray($map)
+{
+    if (is_array($map)) {
+        return $map;
+    } elseif ( ! is_object($map)) {
+        throw new \InvalidArgumentException('A map must be an array or an object.');
+    } elseif ($map instanceof \Iterator) {
+        return iterator_to_array($map);
+    } elseif ($map instanceof \Traversable) {
+        $array = [];
+        foreach ($map as $key => $value) {
+            $array[$key] = $value;
+        }
+
+        return $array;
+    }
+
+    return extractObjectVars($map);
+}
+
+/**
+ * @param object $object
+ * @return array
+ */
+function extractObjectVars($object) {
+    if (is_null($object)) {
+        return [];
+    } elseif (! is_object($object)) {
+        throw new \InvalidArgumentException('Invalid object.');
+    }
+
+    $getter = \Closure::bind(function() {
+        return get_object_vars($this);
+    }, $object, get_class($object));
+
+    return $getter();
 }
