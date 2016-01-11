@@ -40,7 +40,7 @@ function variadicCall(callable $callable, array $args = [])
  */
 function variadicCallBoolVal(callable $callable, array $args = [])
 {
-    return boolval(variadicCall($callable, $args));
+    return (bool) variadicCall($callable, $args);
 }
 
 /**
