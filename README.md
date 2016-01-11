@@ -1,9 +1,11 @@
-Pentothal (WIP)
-===============
+Pentothal
+=========
 
-Higher order predicates library.
+> Higher order predicates library.
 
-## What?
+----------------------------------
+
+# What?
 
 An "higher order function" is a function that either returns a function or takes a function as argument.
 
@@ -60,7 +62,12 @@ $strings = array_filter($data, P\combine(P\isType('string'), P\isNotEmpty()));
 All the functions in this library are in `Pentothal` namespace.
 
 
-## List of functions
+# Installation
+
+Served by Composer using `gmazzap/pentothal`.
+
+
+# List of functions
 
 Here a list of all the functions currently provided by library (namespace omitted):
 
@@ -173,15 +180,15 @@ Here a list of all the functions currently provided by library (namespace omitte
 
  - `hasMethod(string $method)`
  - `hasNotMethod(string $method)`
- - `methodReturn(string $method, $value)`
- - `methodNotReturn(string $method, $value)`
- - `methodReturnAnyOf(string $method, array $values)`
- - `methodNotReturnAnyOf(string $method, array $values)`
- - `methodReturnType(string $method, string $type)`
- - `methodNotReturnType(string $method, string $type)`
- - `methodReturnEmpty(string $method)`
- - `methodReturnNotEmpty(string $method)`
- - `methodReturnApply(string $method, callable $predicate)` Return a predicate that applies a predicate return value of given method of the subject
+ - `methodReturn(string $method, $value, array $methodArgs = [])`
+ - `methodNotReturn(string $method, $value, array $methodArgs = [])`
+ - `methodReturnAnyOf(string $method, array $values, array $methodArgs = [])`
+ - `methodNotReturnAnyOf(string $method, array $values, array $methodArgs = [])`
+ - `methodReturnType(string $method, string $type, array $methodArgs = [])`
+ - `methodNotReturnType(string $method, string $type, array $methodArgs = [])`
+ - `methodReturnEmpty(string $method, array $methodArgs = [])`
+ - `methodReturnNotEmpty(string $method, array $methodArgs = [])`
+ - `methodReturnApply(string $method, callable $predicate, array $methodArgs = [])` Return a predicate that applies a predicate return value of given method of the subject
 
  
 ### Bulk
@@ -199,7 +206,7 @@ Here a list of all the functions currently provided by library (namespace omitte
 - `combineMap(array $predicates)` Takes a map of predicates and return a predicates that applies to a map value, returns true when all the predicates return true
 - `poolMap(array $predicates)` Like combineMap, but the returned predicates return `true` when any the predicates returns `true`
  
-## Quite complex example
+# Quite complex example
 
 ```php
 // some example data
