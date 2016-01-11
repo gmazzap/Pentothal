@@ -11,53 +11,114 @@
 namespace Pentothal;
 
 /**
- * @param callable[] $callbacks
- * @return \Closure
+ * Applies a predicates map to a subject map.
+ *
+ * Takes a map of predicates and a subject in form of map, then apply to any item in the subject
+ * map
+ * the predicate that has the same key in the predicate map.
+ * The resulting array is composed by all the key of subject set to `true` if the related predicate
+ * returned `true` and `false` if  if the related predicate returned `false`.
+ * All subject items without related predicate are `true` in the result.
+ * Any item that is not callable in the predicate map is ignored.
+ *
+ * @param array|object $predicateMap
+ * @param array|object $subjectMap
+ * @return bool[]
+ * @throws \InvalidArgumentException If either `$predicateMap` or `$subjectMap` aren't objects or
+ *                                   arrays
+ *  *
+ *  Example:
+ *
+ * <code>
+ * <?php
+ * use Pentothal as P;
+ *
+ * $predicates = [
+ *   'name'  => combine(P\isString(), P\isNotEmpty()),
+ *   'email' => P\isEmail(),
+ *   'phone' => combine(P\isString(), P\startWith('+'), P\sizeMin(5)),
+ * ];
+ *
+ * $user = [
+ *   'name'  => 'John Doe',
+ *   'email' => 'john.doe@johndoe.me',
+ *   'phone' => '---',
+ * ];
+ *
+ * $correct = map($predicates, $user);
+ *
+ * var_export($errors); // array('name' => true, 'email' => true, 'phone' => false)
+ * ?>
+ * </code>
  */
-function combineMap(array $callbacks)
+function map($predicateMap, $subjectMap)
 {
-    $callbacks = array_filter($callbacks, 'is_callable');
-    if (empty($callbacks)) {
-        return never();
-    }
+    /** @var array $predicates */
+    $predicates = array_filter(mapAsArray($predicateMap), 'is_callable');
+    /** @var array $subject */
+    $subject = mapAsArray($subjectMap);
 
-    return function ($item) use ($callbacks) {
-        if (! is_array($item) && ! is_object($item)) {
-            return false;
-        }
+    $result = array_fill_keys(array_keys($subject), true);
+    array_walk($predicates, function (callable $predicate, $key, $subject) use (&$result) {
+        isset($subject[$key]) and $result[$key] = $predicate($subject[$key]);
+    }, $subject);
 
-        foreach ($callbacks as $key => $callback) {
-            if (! variadicCallBoolVal(keyApply($key, $callback), func_get_args())) {
-                return false;
-            }
-        }
-
-        return true;
-    };
+    return $result;
 }
 
 /**
- * @param callable[] $callbacks
- * @return \Closure
+ * Apply an inverse predicates map to a subject map.
+ *
+ * Takes a map of predicates and a subject in form of map, then apply to any item in the subject
+ * map
+ * the inverse of the predicate that has the same key in the predicate map.
+ * The resulting array is composed by all the key of subject set to `true` if the related predicate
+ * returned `false` and `false` if  if the related predicate returned `true`.
+ * All subject items without related predicate are `false` in the result.
+ * Any item that is not callable in the predicate map is ignored.
+ *
+ * Example:
+ *
+ * <code>
+ * <?php
+ * use Pentothal as P;
+ *
+ * $predicates = [
+ *   'name'  => combine(P\isString(), P\isNotEmpty()),
+ *   'email' => P\isEmail(),
+ *   'phone' => combine(P\isString(), P\startWith('+'), P\sizeMin(5)),
+ * ];
+ *
+ * $user = [
+ *   'name'  => 'John Doe',
+ *   'email' => 'john.doe@johndoe.me',
+ *   'phone' => '---',
+ * ];
+ *
+ * $errors = mapInverse($predicates, $user);
+ *
+ * var_export($errors); // array('name' => false, 'email' => false, 'phone' => true)
+ * ?>
+ * </code>
+ *
+ * @param array|object $predicateMap
+ * @param array|object $subjectMap
+ * @return bool[]
+ * @throws \InvalidArgumentException If either `$predicateMap` or `$subjectMap` aren't objects or
+ *                                   arrays
  */
-function poolMap(array $callbacks)
+function mapInverse($predicateMap, $subjectMap)
 {
-    $callbacks = array_filter($callbacks, 'is_callable');
-    if (empty($callbacks)) {
-        return never();
-    }
+    /** @var array $predicates */
+    $predicates = array_filter(mapAsArray($predicateMap), 'is_callable');
+    /** @var array $subject */
+    $subject = mapAsArray($subjectMap);
 
-    return function ($item) use ($callbacks) {
-        if (! is_array($item) && ! is_object($item)) {
-            return false;
-        }
+    $result = array_fill_keys(array_keys($subject), false);
+    array_walk($predicates, function (callable $predicate, $key, $subject) use (&$result) {
+        $negate = negate($predicate);
+        isset($subject[$key]) and $result[$key] = $negate($subject[$key]);
+    }, $subject);
 
-        foreach ($callbacks as $key => $callback) {
-            if (variadicCallBoolVal(keyApply($key, $callback), func_get_args())) {
-                return true;
-            }
-        }
-
-        return false;
-    };
+    return $result;
 }
