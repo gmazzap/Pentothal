@@ -215,12 +215,7 @@ function hasValue($value)
         if (is_object($item)) {
             $clone = clone $item;
             unset($item);
-<<<<<<< HEAD
-            ($clone instanceof \Traversable) or $clone = get_object_vars($clone);
-=======
             ($clone instanceof \Traversable) or $clone = extractObjectVars($clone);
->>>>>>> refs/remotes/origin/dev
-            $item = $clone;
         }
 
         foreach ($item as $element) {
