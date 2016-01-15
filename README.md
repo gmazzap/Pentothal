@@ -226,13 +226,9 @@ Here a list of all the functions currently provided by library (namespace omitte
 ```php
 use Pentothal as P;
 
-function getYear(DateTime $data)
-{
-    return $data->format('Y');
-}
+$data = ['yes', 'no', 'Yes', 'No', 'YES', 'NO' ];
 
-$datesFrom2016 = array_filter($dates, P\applyAfter('getYear', isSame('2016')));
-
+$yes = array_filter($data, P\applyAfter('strtolower', isSame('yes'))); // ['yes', 'Yes', 'YES']
 ```
  
 # Quite complex example
