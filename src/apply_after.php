@@ -11,13 +11,13 @@
 namespace Pentothal;
 
 /**
- * Returns a function which applies a transformation function to it's imput
+ * Returns a function which applies a transformation function to it's input
  * before testing it with the predicate function.
  *
  * @param  callable $transformation
  * @param  callable $predicate
  *
- * @return \Clojure
+ * @return \Closure
  */
 function applyAfter(callable $transformation, callable $predicate)
 {
